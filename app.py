@@ -1,116 +1,66 @@
 import streamlit as st
+import pandas as pd
+import os
 
-st.set_page_config(
-    page_title="AI Mental Health System",
-    page_icon="🧠",
-    layout="wide"
-)
+st.set_page_config(page_title="Mental Health App", layout="wide")
 
-# Title Section
-st.title("🧠 AI Mental Health Prediction System")
-st.subheader("Understanding Mental Health in the Modern World")
+st.title("🔐 Happy Mind Login")
 
-st.divider()
+file = "users.csv"
 
-# Introduction Section
-st.header("Why Mental Health is Important")
+# create users.csv if not exists
+if not os.path.exists(file):
+    df = pd.DataFrame(columns=["email","password"])
+    df.to_csv(file,index=False)
 
-st.write("""
-Mental health is a fundamental part of overall well-being. It affects how individuals think,
-feel, and behave in everyday life. A healthy mental state helps people manage stress,
-maintain relationships, work productively, and make meaningful decisions.
+tab1, tab2 = st.tabs(["Login","Sign Up"])
 
-In today's fast-paced digital world, people often focus more on physical health while
-ignoring emotional and psychological well-being. However, mental health problems can
-develop silently and may not always show clear physical symptoms.
-""")
+# LOGIN
+with tab1:
 
-st.divider()
+    email = st.text_input("Email")
+    password = st.text_input("Password", type="password")
 
-# Two column layout
-col1, col2 = st.columns(2)
+    if st.button("Login"):
 
-with col1:
-    st.subheader("Students and Mental Health")
-    st.write("""
-Students today experience significant academic pressure, competition,
-and expectations from family and society. They must balance assignments,
-examinations, social relationships, and career planning at the same time.
+        df = pd.read_csv(file)
 
-Excessive screen time, social media comparisons, and reduced physical
-activity can increase stress levels. Over time this can lead to anxiety,
-lack of motivation, and emotional exhaustion without the student even
-realizing what is happening.
-""")
+        user = df[(df["email"] == email) & (df["password"] == password)]
 
-with col2:
-    st.subheader("Employees and Workplace Stress")
-    st.write("""
-Employees also face mental challenges due to workload, deadlines,
-job insecurity, and the pressure to constantly perform well.
+        if not user.empty:
 
-Long working hours and poor work-life balance can gradually affect
-a person's emotional health. If stress continues for long periods,
-it may result in burnout, reduced productivity, and decreased
-job satisfaction.
-""")
+            st.session_state["logged_in"] = True
+            st.session_state["user_email"] = email
 
-st.divider()
+            st.success("Login Successful")
 
-# Warning section
-st.header("⚠️ When Mental Health is Ignored")
+            st.switch_page("pages/1_Home.py")
 
-st.warning("""
-Ignoring mental health problems can have serious consequences.
-Continuous stress and emotional pressure may lead to sleep problems,
-difficulty concentrating, mood changes, and reduced performance
-in both academic and professional life.
+        else:
+            st.error("Invalid email or password")
 
-In severe cases, untreated mental health conditions can develop
-into anxiety disorders, depression, or long-term burnout.
-Early awareness and support are extremely important.
-""")
 
-st.divider()
+# SIGNUP
+with tab2:
 
-# Benefits Section
-st.header("Benefits of Maintaining Good Mental Health")
+    new_email = st.text_input("Create Email")
+    new_password = st.text_input("Create Password", type="password")
 
-col3, col4, col5 = st.columns(3)
+    if st.button("Create Account"):
 
-with col3:
-    st.success("✔ Better Focus and Productivity")
+        df = pd.read_csv(file)
 
-with col4:
-    st.success("✔ Stronger Relationships")
+        if new_email in df["email"].values:
+            st.warning("Account already exists")
 
-with col5:
-    st.success("✔ Improved Quality of Life")
+        else:
 
-st.write("""
-People who take care of their mental health are generally more confident,
-emotionally stable, and capable of handling challenges effectively.
-Maintaining healthy habits such as proper sleep, physical activity,
-and social interaction can significantly improve mental well-being.
-""")
+            new_user = pd.DataFrame({
+                "email":[new_email],
+                "password":[new_password]
+            })
 
-st.divider()
+            df = pd.concat([df,new_user],ignore_index=True)
+            df.to_csv(file,index=False)
 
-# AI system section
-st.header("How This AI System Helps")
-
-st.info("""
-This AI Mental Health Prediction System analyzes lifestyle factors
-such as sleep hours, screen time, study hours, exercise, and social
-interaction. Using machine learning models, the system predicts
-possible mental health risks and helps users become more aware
-of their emotional well-being.
-
-The goal of this system is to promote awareness and encourage
-people to take proactive steps toward maintaining a healthier
-and more balanced life.
-""")
-
-st.divider()
-
-st.caption("Use the sidebar to navigate through Dashboard, Prediction, Education, and Profile sections.")
+            st.success("Account created successfully")

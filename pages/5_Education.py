@@ -1,203 +1,377 @@
 import streamlit as st
 
+st.set_page_config(page_title="Happy Mind - Education", page_icon="🧠", layout="wide")
+
+if "logged_in" not in st.session_state:
+    st.switch_page("app.py")
+
 st.title("🧠 Mental Health Education Center")
 
 st.write("""
-Mental health plays a very important role in a person's overall well-being.
-Understanding mental health disorders helps individuals recognize early
-symptoms and take preventive actions before the condition becomes severe.
+The **Happy Mind Education Center** provides detailed information about
+common mental health conditions and psychological well-being topics.
+Understanding these topics can help individuals recognize early warning
+signs and adopt healthier lifestyle habits.
 
-Use the search bar below to learn about different mental health conditions.
+Mental health awareness is an important step toward maintaining emotional
+balance, improving productivity, and supporting overall well-being.
 """)
-
-st.write("Available topics: Stress, Anxiety, Depression, Burnout")
-
-search = st.text_input("🔎 Search Mental Health Disorder").lower()
 
 st.divider()
 
-# ---------------- STRESS ----------------
+topic = st.selectbox(
+"📚 Select a Topic to Learn",
+[
+"Select Topic",
+"Stress",
+"Anxiety",
+"Depression",
+"Burnout",
+"Sleep & Mental Health",
+"Digital Well-Being",
+"Emotional Resilience",
+"Mindfulness & Relaxation"
+]
+)
 
-if search == "stress":
+st.divider()
+
+# -------------------------------------------------
+# STRESS
+# -------------------------------------------------
+
+if topic == "Stress":
 
     st.header("😰 Stress")
 
-    st.write("""
-Stress is a natural psychological and physical response that occurs when
-people face demanding or challenging situations. In small amounts,
-stress can be beneficial because it motivates individuals to complete
-tasks and respond effectively to challenges. However, when stress
-continues for a long period of time without proper rest or recovery,
-it can negatively affect a person's mental and physical health.
-
-Many students and working professionals experience stress due to
-academic pressure, deadlines, heavy workload, and expectations from
-family or society. Chronic stress can reduce concentration,
-affect sleep quality, and lower overall productivity.
-
-Early identification of stress is important because unmanaged stress
-can eventually lead to more serious mental health conditions such as
-anxiety or depression.
-""")
-
-    st.subheader("Early Signs of Stress")
+    st.subheader("Overview")
 
     st.write("""
-People experiencing stress may start noticing several early warning
-signs such as headaches, fatigue, irritability, and difficulty
-concentrating on tasks. Some individuals may also experience sleep
-disturbances, mood swings, and a feeling of being overwhelmed.
-These symptoms indicate that the body and mind are struggling to
-cope with pressure.
+Stress is the body’s natural response to pressure or challenging
+situations. When individuals encounter demanding circumstances,
+the brain activates the **fight-or-flight response**, releasing
+hormones such as cortisol and adrenaline. These hormones prepare
+the body to react quickly to potential threats.
+
+In small amounts, stress can be helpful because it increases
+alertness, motivation, and focus. However, when stress becomes
+chronic or overwhelming, it can negatively affect both mental
+and physical health.
 """)
 
-    st.subheader("Ways to Manage Stress")
+    st.subheader("Common Causes")
 
     st.write("""
-Stress can be managed through healthy lifestyle habits and
-relaxation techniques. Regular physical exercise helps release
-endorphins that improve mood and reduce tension. Maintaining
-a proper sleep schedule and limiting excessive screen time
-also supports mental balance.
+Stress can arise from many aspects of life, including:
 
-Practices such as meditation, deep breathing exercises,
-and mindfulness are effective in calming the mind. In addition,
-talking with friends, family members, or mentors can provide
-emotional support and help individuals handle stressful
-situations more effectively.
+- Academic pressure and examinations
+- Work deadlines and heavy workload
+- Financial difficulties
+- Relationship conflicts
+- Major life changes
+- Lack of sleep or poor lifestyle habits
 """)
 
-# ---------------- ANXIETY ----------------
+    st.subheader("Symptoms")
 
-elif search == "anxiety":
+    st.write("""
+Stress affects individuals in different ways. Common symptoms include:
+
+- Headaches or muscle tension
+- Difficulty concentrating
+- Irritability or mood swings
+- Sleep disturbances
+- Feeling overwhelmed or anxious
+""")
+
+    st.subheader("Impact on Health")
+
+    st.write("""
+Chronic stress can weaken the immune system, increase the risk
+of cardiovascular diseases, and contribute to anxiety disorders
+and depression. Long-term stress may also lead to emotional
+exhaustion and reduced productivity.
+""")
+
+    st.subheader("Management Strategies")
+
+    st.write("""
+Stress can be managed through healthy habits such as:
+
+- Regular physical exercise
+- Maintaining a consistent sleep schedule
+- Practicing mindfulness or meditation
+- Taking breaks during work or study
+- Seeking emotional support from friends or family
+""")
+
+# -------------------------------------------------
+# ANXIETY
+# -------------------------------------------------
+
+elif topic == "Anxiety":
 
     st.header("😟 Anxiety")
 
-    st.write("""
-Anxiety is a mental health condition characterized by excessive
-worry, fear, or nervousness about future events or uncertain
-situations. While occasional anxiety is a normal human response
-to stressful situations, persistent and intense anxiety may
-interfere with daily life and personal well-being.
-
-People experiencing anxiety may constantly worry about
-academic performance, social interactions, career choices,
-or personal relationships. This constant worrying can
-create mental fatigue and make it difficult for individuals
-to relax or focus on important tasks.
-""")
-
-    st.subheader("Early Signs of Anxiety")
+    st.subheader("Overview")
 
     st.write("""
-Early signs of anxiety include restlessness, difficulty sleeping,
-rapid heartbeat, excessive worrying, and difficulty concentrating.
-Individuals may also feel constantly tense or nervous even when
-there is no immediate danger or problem.
-
-Over time, untreated anxiety can affect academic performance,
-work productivity, and relationships with others.
+Anxiety is characterized by persistent feelings of worry,
+nervousness, or fear about future events or uncertain situations.
+While occasional anxiety is a normal response to stress,
+excessive or prolonged anxiety may interfere with daily life.
 """)
 
-    st.subheader("Ways to Reduce Anxiety")
+    st.subheader("Types of Anxiety")
 
     st.write("""
-Managing anxiety involves adopting calming and supportive
-lifestyle practices. Regular physical activity, meditation,
-and deep breathing techniques can help regulate emotions
-and reduce nervousness.
+Common anxiety disorders include:
 
-Limiting caffeine intake, reducing excessive screen exposure,
-and maintaining a structured daily routine can also improve
-mental stability. In more severe cases, professional guidance
-from psychologists or counselors can help individuals develop
-coping strategies and manage anxiety effectively.
+- Generalized Anxiety Disorder (GAD)
+- Social Anxiety Disorder
+- Panic Disorder
+- Specific Phobias
 """)
 
-# ---------------- DEPRESSION ----------------
+    st.subheader("Symptoms")
 
-elif search == "depression":
+    st.write("""
+Symptoms may include:
+
+- Restlessness
+- Rapid heartbeat
+- Difficulty sleeping
+- Excessive worrying
+- Difficulty concentrating
+""")
+
+    st.subheader("Causes")
+
+    st.write("""
+Anxiety can result from a combination of biological,
+psychological, and environmental factors such as
+genetics, traumatic experiences, or prolonged stress.
+""")
+
+    st.subheader("Management")
+
+    st.write("""
+Effective strategies include:
+
+- Deep breathing exercises
+- Regular physical activity
+- Cognitive behavioral therapy (CBT)
+- Limiting caffeine intake
+- Developing structured routines
+""")
+
+# -------------------------------------------------
+# DEPRESSION
+# -------------------------------------------------
+
+elif topic == "Depression":
 
     st.header("😔 Depression")
+
+    st.subheader("Overview")
 
     st.write("""
 Depression is a serious mental health disorder that affects
 how a person thinks, feels, and behaves. It is characterized
-by persistent feelings of sadness, hopelessness, and loss of
-interest in activities that were once enjoyable.
-
-Unlike temporary sadness that everyone experiences from time
-to time, depression can last for weeks or months and may
-significantly impact daily life. Students and professionals
-experiencing depression may struggle with concentration,
-motivation, and maintaining relationships.
+by persistent sadness and loss of interest in activities.
 """)
 
-    st.subheader("Early Signs of Depression")
+    st.subheader("Symptoms")
 
     st.write("""
-Common early symptoms of depression include prolonged sadness,
-lack of motivation, fatigue, difficulty sleeping or oversleeping,
-changes in appetite, and loss of interest in hobbies or social
-activities. Individuals may also experience feelings of worthlessness
-or low self-esteem.
+Common symptoms include:
 
-Recognizing these early signs is important because early
-intervention can prevent the condition from becoming more severe.
+- Persistent sadness
+- Loss of motivation
+- Fatigue
+- Sleep disturbances
+- Feelings of worthlessness
 """)
 
-    st.subheader("Ways to Cope with Depression")
+    st.subheader("Causes")
 
     st.write("""
-Coping with depression often requires a combination of healthy
-lifestyle habits and emotional support. Engaging in regular
-physical activity, maintaining a structured daily routine,
-and staying socially connected can significantly improve mood.
-
-Spending time with supportive friends or family members helps
-reduce feelings of isolation. In more serious cases, seeking
-professional mental health support from therapists or counselors
-is strongly recommended.
+Depression may be caused by genetic factors, chemical
+imbalances in the brain, traumatic experiences, or
+chronic stress.
 """)
 
-# ---------------- BURNOUT ----------------
+    st.subheader("Treatment")
 
-elif search == "burnout":
+    st.write("""
+Treatment options include:
+
+- Psychotherapy
+- Medication prescribed by professionals
+- Physical exercise
+- Social support
+""")
+
+# -------------------------------------------------
+# BURNOUT
+# -------------------------------------------------
+
+elif topic == "Burnout":
 
     st.header("🔥 Burnout")
+
+    st.subheader("Overview")
 
     st.write("""
 Burnout is a state of emotional, mental, and physical exhaustion
 caused by prolonged stress, especially related to work or academic
-responsibilities. It often occurs when individuals feel overwhelmed
-by continuous pressure and lack adequate rest or relaxation.
-
-Students preparing for exams or professionals working long hours
-may experience burnout when they push themselves beyond their
-mental and physical limits for extended periods of time.
+responsibilities.
 """)
 
-    st.subheader("Early Signs of Burnout")
+    st.subheader("Symptoms")
 
     st.write("""
-Early symptoms of burnout include constant fatigue, reduced
-motivation, decreased productivity, and feelings of frustration
-or detachment from work or studies. Individuals may also feel
-emotionally drained and unable to meet daily demands.
+Common signs include:
+
+- Chronic fatigue
+- Lack of motivation
+- Decreased productivity
+- Emotional exhaustion
 """)
 
-    st.subheader("Ways to Recover from Burnout")
+    st.subheader("Recovery")
 
     st.write("""
-Recovering from burnout requires restoring balance between
-work and personal life. Taking regular breaks, practicing
-time management, and setting realistic goals can reduce
-excessive workload pressure.
+Recovery strategies include:
 
-Engaging in hobbies, spending time outdoors, and maintaining
-a healthy sleep schedule can also help the mind recover
-from prolonged stress and improve overall well-being.
+- Taking regular breaks
+- Setting realistic goals
+- Maintaining work-life balance
+- Engaging in hobbies
 """)
 
-elif search != "":
-    st.warning("Topic not found. Try: Stress, Anxiety, Depression, Burnout")
+# -------------------------------------------------
+# SLEEP
+# -------------------------------------------------
+
+elif topic == "Sleep & Mental Health":
+
+    st.header("😴 Sleep & Mental Health")
+
+    st.write("""
+Sleep is essential for emotional regulation, cognitive
+function, and overall mental health.
+""")
+
+    st.subheader("Benefits of Quality Sleep")
+
+    st.write("""
+- Improves concentration
+- Regulates emotions
+- Reduces stress
+- Supports memory and learning
+""")
+
+    st.subheader("Sleep Hygiene Tips")
+
+    st.write("""
+- Maintain consistent sleep schedules
+- Avoid screens before bedtime
+- Create a comfortable sleeping environment
+- Limit caffeine intake at night
+""")
+
+# -------------------------------------------------
+# DIGITAL WELLBEING
+# -------------------------------------------------
+
+elif topic == "Digital Well-Being":
+
+    st.header("📱 Digital Well-Being")
+
+    st.write("""
+Digital well-being refers to maintaining a healthy relationship
+with technology and managing screen time effectively.
+""")
+
+    st.subheader("Common Problems")
+
+    st.write("""
+- Social media comparison
+- Screen addiction
+- Sleep disruption
+""")
+
+    st.subheader("Healthy Habits")
+
+    st.write("""
+- Schedule screen-free time
+- Reduce social media usage
+- Take digital detox breaks
+""")
+
+# -------------------------------------------------
+# RESILIENCE
+# -------------------------------------------------
+
+elif topic == "Emotional Resilience":
+
+    st.header("🧠 Emotional Resilience")
+
+    st.write("""
+Emotional resilience is the ability to adapt to stressful
+situations and recover from challenges.
+""")
+
+    st.subheader("Ways to Build Resilience")
+
+    st.write("""
+- Develop positive thinking habits
+- Maintain supportive relationships
+- Learn problem-solving skills
+""")
+
+# -------------------------------------------------
+# MINDFULNESS
+# -------------------------------------------------
+
+elif topic == "Mindfulness & Relaxation":
+
+    st.header("🧘 Mindfulness & Relaxation")
+
+    st.write("""
+Mindfulness is the practice of focusing attention on the
+present moment without judgment.
+""")
+
+    st.subheader("Common Techniques")
+
+    st.write("""
+- Meditation
+- Deep breathing
+- Yoga
+- Journaling thoughts
+""")
+
+st.divider()
+
+st.subheader("💡 Daily Mental Wellness Habits")
+
+col1,col2,col3 = st.columns(3)
+
+col1.success("😴 Maintain healthy sleep")
+col2.success("🏃 Exercise regularly")
+col3.success("👥 Stay socially connected")
+
+col1.success("🧘 Practice mindfulness")
+col2.success("📵 Reduce excessive screen time")
+col3.success("📅 Manage time effectively")
+
+# ---------- SIDEBAR ----------
+
+st.sidebar.write("Logged in as:")
+st.sidebar.success(st.session_state["user_email"])
+
+if st.sidebar.button("Logout"):
+    st.session_state.clear()
+    st.switch_page("app.py")
