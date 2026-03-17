@@ -3,7 +3,5 @@ pandas
 numpy 
 scikit-learn
 joblib
-streamlit
-pandas
 matplotlib
 plotly
